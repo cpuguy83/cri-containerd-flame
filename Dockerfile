@@ -1,5 +1,8 @@
 FROM golang:1.9 as bench
-RUN mkdir -p /go/src/github.com/estesp && cd /go/src/github.com/estesp && git clone https://github.com/estesp/bucketbench.git
+ARG BUCKETBENCH_REPO=https://github.com/estesp/bucketbench.git
+ARG BUCKETBENCH_COMMIT=HEAD
+ARG BUCKETBENCH_BRANCH=master
+RUN mkdir -p /go/src/github.com/estesp && cd /go/src/github.com/estesp && git clone -b $BUCKETBENCH_BRANCH $BUCKETBENCH_REPO && cd bucketbench && git checkout $BUCKETBENCH_COMMIT
 WORKDIR /go/src/github.com/estesp/bucketbench
 RUN go build
 COPY bench.yaml /bench.yaml
