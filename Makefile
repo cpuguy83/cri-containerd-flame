@@ -10,7 +10,7 @@ build: build/c8d.txt build/cri.txt build/bench.txt
 bench.yaml:
 
 build/bench.txt: bench.yaml
-	mkdir -p build && docker build --target bench --iidfile=$@ $($bench_build_args) -t cric8d/bench .
+	mkdir -p build && docker build --target bench --iidfile=$@ $(bench_build_args) -t cric8d/bench .
 
 .PRECIOUS: build/%.txt
 build/%.txt:
@@ -35,7 +35,7 @@ run/torch: run/cri run/bench
 		rm run/bench
 
 .PRECIOUS: run/%
-run/%:  build/%.txt run/base
+run/%:  build/c8d.txt build/%.txt run/base
 	mkdir -p run && docker run -d -t --privileged --cidfile=$@ --volumes-from $(shell cat run/base) --net=container:$(shell cat run/base) $(shell cat build/$*.txt)
 
 .PHONY: clean
