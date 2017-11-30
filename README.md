@@ -14,7 +14,7 @@ make
 
 This will both output the bucketbench results to stdout and create a flamegraph in `./run/torch.svg`
 
-To modify the workload being used, customize the `bench.yaml` file. This is a configuration for [bucketbench](github.com/estesp/bucketbench).
+To modify the workload being used, customize the `bench.yaml` file. This is a configuration for [bucketbench](https://github.com/estesp/bucketbench).
 You can also customize the repos/commits used for containerd and cri-containerd like so:
 
 ```
